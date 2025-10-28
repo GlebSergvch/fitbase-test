@@ -1,38 +1,46 @@
-version: '3.2'
+version: "3.7"
 
 services:
-
-  frontend:
-    build: frontend
-    ports:
-      - 20080:80
+  app:
+    build: docker/php
     volumes:
-      # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
       - ./:/app
-
-  backend:
-    build: backend
-    ports:
-      - 21080:80
-    volumes:
-      # Re-use local composer cache via host-volume
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
-      - ./:/app
-
-  mysql:
-    image: mysql:5.7
     environment:
-      - MYSQL_ROOT_PASSWORD=verysecret
-      - MYSQL_DATABASE=yii2advanced
-      - MYSQL_USER=yii2advanced
-      - MYSQL_PASSWORD=secret
+      PHP_IDE_CONFIG: "serverName=Docker"
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    depends_on:
+      db:
+        condition: service_healthy
 
-  #pgsql:
-  #  image: postgres:9.5
-  #  environment:
-  #    - POSTGRES_DB=yii2advanced
-  #    - POSTGRES_USER=yii2advanced
-  #    - POSTGRES_PASSWORD=secret
+  nginx:
+    image: nginx:1.19-alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./:/app
+      - ./docker/nginx/vhost.conf:/etc/nginx/conf.d/vhost.conf
+    depends_on:
+      - app
+
+  db:
+    image: mysql:8
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./docker/mysql/config.cnf:/etc/mysql/conf.d/config.cnf
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fitbase
+      MYSQL_USER: fitbase_user
+      MYSQL_PASSWORD: secret
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+volumes:
+  db_data:
+    name: fitbase_db_data
