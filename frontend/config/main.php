@@ -14,6 +14,7 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
+            'cookieValidationKey' => env('YII_COOKIE_VALIDATION_KEY'), // ← ВОТ ЗДЕСЬ
             'csrfParam' => '_csrf-frontend',
         ],
         'urlManager' => [
@@ -30,6 +31,7 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => ['site/login'],
             'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
         ],
         'session' => [

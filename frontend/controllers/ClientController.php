@@ -8,17 +8,8 @@ use common\models\Client;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-class ClientController extends \yii\web\Controller
+class ClientController extends BaseAuthController
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::class,
-                'actions' => ['delete' => ['POST']],
-            ],
-        ];
-    }
 
     public function actionIndex()
     {

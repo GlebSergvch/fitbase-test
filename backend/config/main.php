@@ -15,6 +15,7 @@ return [
     'modules' => [],
     'components' => [
         'request' => [
+            'cookieValidationKey' => env('YII_COOKIE_VALIDATION_KEY'),
             'csrfParam' => '_csrf-backend',
         ],
         'user' => [

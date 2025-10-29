@@ -10,17 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 
-class ClubController extends Controller
+class ClubController extends BaseAuthController
 {
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::class,
-                'actions' => ['delete' => ['POST']],
-            ],
-        ];
-    }
 
     public function actionIndex()
     {
