@@ -2,9 +2,6 @@
 
 use yii\db\Migration;
 
-/**
- * Handles the creation of table `{{%club}}`.
- */
 class m251028_205425_create_club_table extends Migration
 {
     public function safeUp()
@@ -13,11 +10,11 @@ class m251028_205425_create_club_table extends Migration
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
             'address' => $this->text(),
-            'created_at' => $this->integer(),
+            'created_at' => $this->dateTime(),
             'created_by' => $this->integer(),
-            'updated_at' => $this->integer(),
+            'updated_at' => $this->dateTime(),
             'updated_by' => $this->integer(),
-            'deleted_at' => $this->integer(),
+            'deleted_at' => $this->dateTime(),
             'deleted_by' => $this->integer(),
         ]);
 
@@ -28,35 +25,9 @@ class m251028_205425_create_club_table extends Migration
         $this->createIndex('{{%idx-club-deleted_by}}', '{{%club}}', 'deleted_by');
 
         // Внешние ключи
-        $this->addForeignKey(
-            '{{%fk-club-created_by}}',
-            '{{%club}}',
-            'created_by',
-            '{{%user}}',
-            'id',
-            'SET NULL',
-            'CASCADE'
-        );
-
-        $this->addForeignKey(
-            '{{%fk-club-updated_by}}',
-            '{{%club}}',
-            'updated_by',
-            '{{%user}}',
-            'id',
-            'SET NULL',
-            'CASCADE'
-        );
-
-        $this->addForeignKey(
-            '{{%fk-club-deleted_by}}',
-            '{{%club}}',
-            'deleted_by',
-            '{{%user}}',
-            'id',
-            'SET NULL',
-            'CASCADE'
-        );
+        $this->addForeignKey('{{%fk-club-created_by}}', '{{%club}}', 'created_by', '{{%user}}', 'id', 'SET NULL');
+        $this->addForeignKey('{{%fk-club-updated_by}}', '{{%club}}', 'updated_by', '{{%user}}', 'id', 'SET NULL');
+        $this->addForeignKey('{{%fk-club-deleted_by}}', '{{%club}}', 'deleted_by', '{{%user}}', 'id', 'SET NULL');
     }
 
     public function safeDown()
@@ -71,7 +42,5 @@ class m251028_205425_create_club_table extends Migration
         $this->dropIndex('{{%idx-club-deleted_by}}', '{{%club}}');
 
         $this->dropTable('{{%club}}');
-
-        return true;
     }
 }
