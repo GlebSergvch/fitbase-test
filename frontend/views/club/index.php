@@ -20,15 +20,18 @@ $this->title = 'Клубы';
         'options' => ['data-pjax' => true, 'class' => 'form-inline'],
     ]); ?>
 
-    <div class="row">
-        <div class="col-md-4">
+    <div class="row align-items-end row-filter">
+        <div class="col-md-3">
             <?= $form->field($searchModel, 'name')->textInput(['placeholder' => 'Название']) ?>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
             <?= $form->field($searchModel, 'archive')->checkbox(['label' => 'Показать архив']) ?>
         </div>
-        <div class="col-md-2" style="padding-top: 25px;">
-            <?= Html::submitButton('Фильтр', ['class' => 'btn btn-primary']) ?>
+        <div class="col-md-1 text-md-right" style="padding-top: 25px;">
+            <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
+        </div>
+        <div class="col-md-1 text-md-right" style="padding-top: 25px;">
+            <?= Html::a('Сбросить', ['index'], ['class' => 'btn btn-default']) ?>
         </div>
     </div>
 

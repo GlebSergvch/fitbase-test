@@ -22,9 +22,9 @@ $this->title = 'Клиенты';
         'options' => ['data-pjax' => true],
     ]); ?>
 
-    <div class="row align-items-end">
-        <div class="col-md-3">
-            <?= $form->field($searchModel, 'full_name')->textInput(['placeholder' => 'ФИО', 'class' => 'form-control']) ?>
+    <div class="row align-items-end client-filter row-filter">
+        <div class="col-md-2">
+            <?= $form->field($searchModel, 'full_name')->textInput(['placeholder' => 'ФИО', 'class' => 'form-control'])->label(false) ?>
         </div>
 
         <div class="col-md-2">
@@ -50,8 +50,11 @@ $this->title = 'Клиенты';
             ])->label(false) ?>
         </div>
 
-        <div class="col-md-3 text-md-right" style="padding-top: 0;">
-            <?= Html::submitButton('Фильтр', ['class' => 'btn btn-primary']) ?>
+        <div class="col-md-1 text-md-right" style="padding-top: 0;">
+            <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
+        </div>
+
+        <div class="col-md-1 text-md-right" style="padding-top: 0;">
             <?= Html::a('Сбросить', ['index'], ['class' => 'btn btn-default']) ?>
         </div>
     </div>

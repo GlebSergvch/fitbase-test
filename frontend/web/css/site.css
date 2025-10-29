@@ -102,42 +102,69 @@ a.desc:after {
     text-decoration: none;
 }
 
-.client-index {
-    --bs-body-font-size: 16px;
-}
-
-.client-index,
-.client-index .form-control,
-.client-index .input-group,
-.client-index .input-group .input-group-text,
-.client-index .input-group .input-group-addon,
-.client-index .btn,
-.client-index .grid-view,
-.client-index .grid-view table,
-.client-index .grid-view .table,
-.client-index .kv-grid-container {
-    font-size: var(--bs-body-font-size);
-    line-height: 1.4;
-}
-
-.client-form {
-    --bs-body-font-size: 16px;
-}
-
-.client-form,
-.client-form .form-control,
-.client-form .input-group,
-.client-form .input-group .input-group-text,
-.client-form .input-group .input-group-addon,
-.client-form .btn,
-.client-form .grid-view,
-.client-form .grid-view table,
-.client-form .grid-view .table,
-.client-form .kv-grid-container {
-    font-size: var(--bs-body-font-size);
-    line-height: 1.4;
-}
-
 .client-form .input-group-addon {
     width: 40px;
+}
+
+:root {
+    --bs-body-font-size: 16px !important;
+    --bs-navbar-brand-font-size: 16px !important;
+    --bs-btn-bg: 16px !important;
+    --bs-btn-font-size: 16px !important;
+}
+
+.navbar-brand {
+    --bs-navbar-brand-font-size: 16px !important;
+}
+
+.form-control {
+    font-size: 12px !important;
+}
+
+.btn {
+    --bs-btn-font-size: 16px !important; /* 16px */
+    font-size: var(--bs-btn-font-size);  /* можно не указывать, если просто для переменной */
+}
+
+/*.row-filter div {*/
+/*    height: 40px;*/
+/*}*/
+
+/* Общий контейнер фильтра */
+.row-filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;       /* вертикальное выравнивание по центру */
+    gap: 10px;                 /* небольшой отступ между элементами */
+    margin-bottom: 15px;
+}
+
+/* Убираем лишние отступы между полями ActiveForm */
+.row-filter .form-group {
+    margin-bottom: 0;
+}
+
+/* Подгоняем высоту всех элементов под одну линию */
+.row-filter .form-control,
+.row-filter .btn,
+.row-filter .form-check-input,
+.row-filter .input-group,
+.row-filter .daterangepicker {
+    height: 38px;              /* стандартная высота bootstrap-инпутов */
+    line-height: 38px;
+    padding-top: 0;
+    padding-bottom: 0;
+    box-sizing: border-box;
+}
+
+/* Чекбоксы и радио красиво центрируются по вертикали */
+.row-filter .form-check {
+    display: flex;
+    align-items: center;
+    height: 38px;
+}
+
+/* Кнопки в правом столбце — выравнивание в линию */
+.row-filter .btn + .btn {
+    margin-left: 5px;
 }

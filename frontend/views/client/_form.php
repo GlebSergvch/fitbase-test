@@ -21,7 +21,7 @@ echo $form->field($model, 'birth_date')->widget(DatePicker::class, [
 ]);
 
 echo $form->field($model, 'club_ids')->widget(Select2::class, [
-    'data' => Club::find()->select(['name', 'id'])->indexBy('id')->column(),
+    'data' => Club::find()->select(['name', 'id'])->indexBy('id')->andWhere(['IS NOT', 'club.deleted_at', null])->column(),
     'options' => ['placeholder' => 'Выберите клубы...', 'multiple' => true],
     'pluginOptions' => ['allowClear' => true],
 ]);
