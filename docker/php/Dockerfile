@@ -1,6 +1,6 @@
-FROM php:7.4-fpm
+FROM php:8.2-fpm
 
-# Установка зависимостей + mysql-клиент
+# Установим системные пакеты и mysql client
 RUN apt-get update && apt-get install -y \
     git \
     curl \
@@ -12,10 +12,10 @@ RUN apt-get update && apt-get install -y \
     default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
-# Установка PHP-расширений
+# Устанавливаем нужные расширения PHP
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Composer
+# Установим composer (копируем из официального образа)
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
