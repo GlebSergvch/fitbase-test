@@ -16,12 +16,13 @@ $this->title = 'Клиенты';
     </p>
 
     <?php $form = ActiveForm::begin([
+        'id' => 'client-filter-form',
         'action' => ['index'],
         'method' => 'get',
-        'options' => ['data-pjax' => true], // убрали 'class' => 'form-inline'
+        'options' => ['data-pjax' => true],
     ]); ?>
 
-    <div class="row align-items-end"> <!-- align-items-end чтобы кнопка выровнялась -->
+    <div class="row align-items-end">
         <div class="col-md-3">
             <?= $form->field($searchModel, 'full_name')->textInput(['placeholder' => 'ФИО', 'class' => 'form-control']) ?>
         </div>
@@ -51,14 +52,24 @@ $this->title = 'Клиенты';
 
         <div class="col-md-3 text-md-right" style="padding-top: 0;">
             <?= Html::submitButton('Фильтр', ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Сбросить', ['index'], ['class' => 'btn btn-default']) ?>
         </div>
     </div>
 
     <?php ActiveForm::end(); ?>
 
-    <?php Pjax::begin(['id' => 'client-pjax']); ?>
+    <hr/>
+
+    <?php Pjax::begin([
+        'id' => 'client-pjax',
+        'timeout' => 5000,
+        'enablePushState' => false,
+        'formSelector' => '#client-filter-form', // <- добавлено
+    ]); ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => null,
         'columns' => [
             'full_name',
             'gender',
@@ -76,5 +87,6 @@ $this->title = 'Клиенты';
             ],
         ],
     ]); ?>
+
     <?php Pjax::end(); ?>
 </div>

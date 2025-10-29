@@ -44,14 +44,6 @@ $this->title = 'Клубы';
             [
                 'class' => 'yii\grid\ActionColumn',
                 'template' => '{view} {update} {delete}',
-                'buttons' => [
-                    'view' => fn($url) => Html::a('Открыть', $url, ['class' => 'btn btn-xs btn-info']),
-                    'update' => fn($url) => Html::a('Изменить', $url, ['class' => 'btn btn-xs btn-warning']),
-                    'delete' => fn($url) => Html::a('Удалить', $url, [
-                        'class' => 'btn btn-xs btn-danger',
-                        'data' => ['confirm' => 'Удалить?', 'method' => 'post'],
-                    ]),
-                ],
             ],
         ],
     ]); ?>

@@ -119,3 +119,25 @@ a.desc:after {
     font-size: var(--bs-body-font-size);
     line-height: 1.4;
 }
+
+.client-form {
+    --bs-body-font-size: 16px;
+}
+
+.client-form,
+.client-form .form-control,
+.client-form .input-group,
+.client-form .input-group .input-group-text,
+.client-form .input-group .input-group-addon,
+.client-form .btn,
+.client-form .grid-view,
+.client-form .grid-view table,
+.client-form .grid-view .table,
+.client-form .kv-grid-container {
+    font-size: var(--bs-body-font-size);
+    line-height: 1.4;
+}
+
+.client-form .input-group-addon {
+    width: 40px;
+}
