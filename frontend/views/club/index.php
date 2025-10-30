@@ -15,6 +15,7 @@ $this->title = 'Клубы';
     </p>
 
     <?php $form = ActiveForm::begin([
+        'id' => 'club-filter-form',
         'action' => ['index'],
         'method' => 'get',
         'options' => ['data-pjax' => true, 'class' => 'form-inline'],
@@ -37,7 +38,13 @@ $this->title = 'Клубы';
 
     <?php ActiveForm::end(); ?>
 
-    <?php Pjax::begin(['id' => 'club-pjax']); ?>
+    <?php Pjax::begin([
+        'id' => 'club-pjax',
+        'timeout' => 5000,
+        'enablePushState' => false,
+        'formSelector' => '#club-filter-form', // <- добавлено
+    ]); ?>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
